@@ -246,10 +246,16 @@ def list_feed_newznab(feedUrl, index):
                 info_labels['tvshowtitle'] = attribs['tvtitle']
             except:
                 pass
-            aired = attribs.get('tvairdate', None)
-            if aired is not None:
-                time_tuple = parsedate(aired)
-                info_labels['aired'] = time.strftime("%Y-%m-%d", time_tuple)
+            try:
+                info_labels['aired'] = attribs['tvairdate']
+            except:
+                pass
+            # aired = attribs.get('tvairdate', None)
+            # if aired is not None:
+            #     time_tuple = parsedate(aired)
+            #     print aired
+            #     print time_tuple
+            #     info_labels['aired'] = time.strftime("%Y-%m-%d", time_tuple)
             try:
                 info_labels['category'] = attribs['category']
             except:
