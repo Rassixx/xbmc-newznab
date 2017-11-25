@@ -262,7 +262,7 @@ def list_feed_newznab(feedUrl, index):
                 pass
             nzb = get_node_value(item, "link")
             thumb = attribs.get('coverurl', "")
-            info_labels['backdropcoverurl'] = attribs.get('backdropcoverurl', "")
+            info_labels['backdropurl'] = attribs.get('backdropurl', "")
             is_hd = (False, True)[re.search("(720p|1080p)", info_labels['title'], re.IGNORECASE) is not None]
             if is_hd:
                 info_labels['overlay'] = 8
@@ -306,7 +306,7 @@ def add_posts(info_labels, index, **kwargs):
     if 'folder' in kwargs:
         folder = kwargs['folder']
     listitem=xbmcgui.ListItem(info_labels['title'], iconImage="DefaultVideo.png", thumbnailImage=thumb)
-    fanart = info_labels.get('backdropcoverurl', "") #thumb.replace('-cover','-backdrop')
+    fanart = info_labels.get('backdropurl', "") #thumb.replace('-cover','-backdrop')
     listitem.setProperty("Fanart_Image", fanart)
     ###
     # if 'videoresolution' in info_labels:
