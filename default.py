@@ -263,6 +263,18 @@ def list_feed_newznab(feedUrl, index):
             nzb = get_node_value(item, "link")
             thumb = attribs.get('coverurl', "")
             info_labels['backdropurl'] = attribs.get('backdropurl', "")
+            if thumb == "" and info_labels['code'] is not None:
+                #print "no thumb and code"
+                try:
+                    imdb_id = attribs.get('imdb')
+                    thumb = "https://cdn.nzbgeek.info/covers/movies/%s-cover.jpg" % imdb_id
+                    #print "thumb %s" % thumb
+                    info_labels['backdropurl'] = "https://cdn.nzbgeek.info/covers/movies/%s-backdrop.jpg" % imdb_id
+                    #print "backdropurl %s" % info_labels['backdropurl']
+                except:
+                    #print "thumb fail"
+                    pass
+
             is_hd = (False, True)[re.search("(720p|1080p)", info_labels['title'], re.IGNORECASE) is not None]
             if is_hd:
                 info_labels['overlay'] = 8
